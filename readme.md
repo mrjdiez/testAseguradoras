@@ -25,3 +25,13 @@ To do that, just define the FLASK_APP variable and execute the following command
     flask reset-db
     flask run -h 127.0.0.1 -p 5000
 
+# Postman
+
+If you want to test the API or check the existing endpoint you can use the two Postman collections exported 
+within the postman directory. If your server is running in a different interface or port please, remember to update
+the environment variables within the collections.
+
+1. API: Contains the definition of the different endpoints, including the health-check. Feel free to modify whatever parameter.
+2. TestCollection: Contains a series of requests with tests integrated to test the most basic of uses. 
+You can run these tests importing this collection and creating a runner using this collection.
+You can read more about runners [here]([https://learning.postman.com/docs/running-collections/intro-to-collection-runs/)

@@ -1,0 +1,642 @@
+{
+	"info": {
+		"_postman_id": "01002a45-8414-44f0-9901-45e8bd4fe593",
+		"name": "TestCollection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "TestUser",
+			"item": [
+				{
+					"name": "Create User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"pm.test(\"User Created OK\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    var request = JSON.parse(pm.request.body);\r",
+									"    pm.expect(jsonData.id).to.eql(1);\r",
+									"    for (key in request) {\r",
+									"        pm.expect(request[key]).to.eql(jsonData[key])\r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"email@dev.com\",\r\n    \"name\": \"Julian\",\r\n    \"password\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}:{{port}}/api/users/",
+							"host": [
+								"{{server}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Duplicated User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"pm.test(\"Creation Failed\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    var request = JSON.parse(pm.request.body);\r",
+									"    pm.expect(jsonData.description).to.eql(\"There's a user with that email registered\");\r",
+									"    \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"email@dev.com\",\r\n    \"name\": \"Julian\",\r\n    \"password\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}:{{port}}/api/users/",
+							"host": [
+								"{{server}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 202\", function () {\r",
+									"    pm.response.to.have.status(202);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"User Updated OK\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    var request = JSON.parse(pm.request.body);\r",
+									"    pm.expect(jsonData.id).to.eql(1);\r",
+									"    pm.expect(jsonData.password).to.eql(request.password)\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": 1237\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}:{{port}}/api/users/password/1",
+							"host": [
+								"{{server}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"users",
+								"password",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TestInsurer",
+			"item": [
+				{
+					"name": "Create Insurer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"pm.test(\"User Created OK\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    var request = JSON.parse(pm.request.body);\r",
+									"    pm.expect(jsonData.id).to.eql(6);\r",
+									"    for (key in request) {\r",
+									"        pm.expect(request[key]).to.eql(jsonData[key])\r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Mapfre\",\r\n    \"telephone\": 916836496\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}:{{port}}/api/insurers/",
+							"host": [
+								"{{server}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"insurers",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TestInsurance",
+			"item": [
+				{
+					"name": "Create Insurance 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"pm.test(\"User Created OK\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    var request = JSON.parse(pm.request.body);\r",
+									"    pm.expect(jsonData.id).to.eql(1);\r",
+									"    for (key in request) {\r",
+									"        pm.expect(request[key]).to.eql(jsonData[key])\r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": 1,\r\n    \"insurer_id\": 1,\r\n    \"insurance_amount\": 75.16,\r\n    \"insurance_category_id\": 1,\r\n    \"regularity\": \"Annual\",\r\n    \"detail\": \"Audi A3\",\r\n    \"coverage_end_date\": \"2022/01/01\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}:{{port}}/api/insurances/",
+							"host": [
+								"{{server}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"insurances",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Insurance User Not Exists",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"pm.test(\"Creation Failed\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    var request = JSON.parse(pm.request.body);\r",
+									"    pm.expect(jsonData.description).to.eql(\"The user with id: \\\"2\\\" does not exist\");\r",
+									"    \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": 2,\r\n    \"insurer_id\": 1,\r\n    \"insurance_amount\": 75.16,\r\n    \"insurance_category_id\": 1,\r\n    \"regularity\": \"Annual\",\r\n    \"detail\": \"Audi A3\",\r\n    \"coverage_end_date\": \"2022/01/01\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}:{{port}}/api/insurances/",
+							"host": [
+								"{{server}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"insurances",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Insurance insurer Not Exists",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"pm.test(\"Creation Failed\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    var request = JSON.parse(pm.request.body);\r",
+									"    pm.expect(jsonData.description).to.eql(\"The insurer with id: \\\"10\\\" does not exist\");\r",
+									"    \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": 1,\r\n    \"insurer_id\": 10,\r\n    \"insurance_amount\": 75.16,\r\n    \"insurance_category_id\": 1,\r\n    \"regularity\": \"Annual\",\r\n    \"detail\": \"Audi A3\",\r\n    \"coverage_end_date\": \"2022/01/01\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}:{{port}}/api/insurances/",
+							"host": [
+								"{{server}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"insurances",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Insurance Category Not Exists",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"pm.test(\"Creation Failed\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    var request = JSON.parse(pm.request.body);\r",
+									"    pm.expect(jsonData.description).to.eql(\"The insurance category with id: \\\"5\\\" does not exist\");\r",
+									"    \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": 1,\r\n    \"insurer_id\": 1,\r\n    \"insurance_amount\": 75.16,\r\n    \"insurance_category_id\": 5,\r\n    \"regularity\": \"Annual\",\r\n    \"detail\": \"Audi A3\",\r\n    \"coverage_end_date\": \"2022/01/01\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}:{{port}}/api/insurances/",
+							"host": [
+								"{{server}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"insurances",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Insurance Insurer Not Supports Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"pm.test(\"Creation Failed\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    var request = JSON.parse(pm.request.body);\r",
+									"    pm.expect(jsonData.description).to.eql(\"The insurer with id: \\\"3\\\" does not work with insurances of category: \\\"2\\\"\");\r",
+									"    \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": 1,\r\n    \"insurer_id\": 3,\r\n    \"insurance_amount\": 75.16,\r\n    \"insurance_category_id\": 2,\r\n    \"regularity\": \"Annual\",\r\n    \"detail\": \"Audi A3\",\r\n    \"coverage_end_date\": \"2022/01/01\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}:{{port}}/api/insurances/",
+							"host": [
+								"{{server}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"insurances",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Details of Insurance 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"User Updated OK\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.id).to.eql(1);\r",
+									"    pm.expect(jsonData.insurer_name).to.eql(\"Mapfre\");\r",
+									"    pm.expect(jsonData.insurer_telephone).to.eql(\"916836496\");\r",
+									"    pm.expect(jsonData.insurer_id).to.eql(1);\r",
+									"    pm.expect(jsonData.insurance_category).to.eql(\"Coche\");\r",
+									"    pm.expect(jsonData.insurance_category_id).to.eql(1);\r",
+									"    pm.expect(jsonData.detail).to.eql(\"Audi A3\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}:{{port}}/api/insurances/1",
+							"host": [
+								"{{server}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"insurances",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cleanup",
+			"item": [
+				{
+					"name": "Delete User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 202\", function () {\r",
+									"    pm.response.to.have.status(202);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{server}}:{{port}}/api/users/1",
+							"host": [
+								"{{server}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Insurer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 202\", function () {\r",
+									"    pm.response.to.have.status(202);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{server}}:{{port}}/api/insurers/6",
+							"host": [
+								"{{server}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"insurers",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Insurance",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 202\", function () {\r",
+									"    pm.response.to.have.status(202);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{server}}:{{port}}/api/insurances/1",
+							"host": [
+								"{{server}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"insurances",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "server",
+			"value": "localhost"
+		},
+		{
+			"key": "port",
+			"value": "5000"
+		}
+	]
+}
