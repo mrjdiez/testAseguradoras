@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "nombre": "Mapfre",
+    "categorias": [
+      "Coche",
+      "Moto"
+    ],
+    "tlf": 916836496
+  },
+  {
+    "id": 2,
+    "nombre": "Mutua",
+    "categorias": [
+      "Coche",
+      "Moto"
+    ],
+    "tlf": 916836433
+  },
+  {
+    "id": 3,
+    "nombre": "Pelayo",
+    "categorias": [
+      "Coche"
+    ],
+    "tlf": 9168364345
+  },
+  {
+    "id": 4,
+    "nombre": "Pelayo",
+    "categorias": [
+      "Moto"
+    ],
+    "tlf": 9168364329
+  },
+  {
+    "id": 5,
+    "nombre": "Qualitas Auto",
+    "categorias": [
+      "Coche"
+    ],
+    "tlf": 916836483
+  }
+]
